@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:mvvm/components/app_error.dart';
 import 'package:mvvm/components/app_loading.dart';
 import 'package:mvvm/components/user_list_row.dart';
 import 'package:mvvm/users_list/models/users_list_model.dart';
@@ -16,7 +17,18 @@ class HomeScreen extends StatelessWidget {
     UsersViewModel usersViewModel = context.watch<UsersViewModel>();
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('Users')),
+      appBar: AppBar(
+        title: const Text('Users'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                openAddDetails(context);
+              },
+              icon: const Icon(
+                Icons.add,
+              ))
+        ],
+      ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
         child: Column(children: [
@@ -31,7 +43,9 @@ class HomeScreen extends StatelessWidget {
       return const AppLoading();
     }
     if (usersViewModel.userError != null) {
-      return Container();
+      return AppError(
+        errorText: usersViewModel.userError.toString(),
+      );
     }
     return Expanded(
         child: ListView.separated(

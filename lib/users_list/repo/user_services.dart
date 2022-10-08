@@ -8,15 +8,18 @@ import 'package:http/http.dart' as http;
 class UserServices {
   static Future<Object> getUsers() async {
     try {
-      var url = Uri.parse(USERS_LIST);
-      var response = await http.get(url);
-      if (200 == response.statusCode) {
+      var response = await http.get(Uri.parse(USERS_LIST));
+      if (SUCCESS == response.statusCode) {
         return Success(response: usersListModelFromJson(response.body));
       }
       return Failure(
           code: USER_INVALID_RESPONSE, errorResponse: "Invalid Respone");
     } on HttpException {
-      return Failure(code: NO_INTERNET, errorResponse: "No Internet");
+      return Failure(
+          code: NO_INTERNET, errorResponse: "No Internet Connection");
+    } on SocketException {
+      return Failure(
+          code: NO_INTERNET, errorResponse: "No Internet Connection");
     } on FormatException {
       return Failure(code: INVALID_FORMAT, errorResponse: "Invalid Format");
     } catch (e) {

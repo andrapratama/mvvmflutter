@@ -4,7 +4,7 @@ import 'package:mvvm/components/app_title.dart';
 import 'package:mvvm/users_list/view_models/users_view_model.dart';
 import 'package:provider/provider.dart';
 
-class UserDetailScreeen extends StatelessWidget {
+class UserDetailsScreeen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UsersViewModel usersViewModel = context.watch<UsersViewModel>();
@@ -20,7 +20,7 @@ class UserDetailScreeen extends StatelessWidget {
               text: usersViewModel.selectedUser!.name,
             ),
             Text(
-              usersViewModel.selectedUser!.email,
+              usersViewModel.selectedUser!.email.toString(),
               style: const TextStyle(color: Colors.black),
             )
           ],

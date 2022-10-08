@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm/home_screen.dart';
+import 'package:mvvm/users_list/views/home_screen.dart';
 import 'package:mvvm/users_list/view_models/users_view_model.dart';
 import 'package:provider/provider.dart';
 
